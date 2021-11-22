@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Navbar from './components/Navbar';
+import SingleCountry from './components/SingleCountry';
+import CountriesGrid from './components/CountriesGrid';
+import { useState } from 'react';
+
+// styles
 import './App.css';
 
 function App() {
+  const [mode, setMode] = useState('dark')
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`App ${mode}`}>
+      <BrowserRouter>
+        <Navbar mode={mode} setMode={setMode} />
+        <main>
+          <Switch>
+            <Route exact path="/">
+              <CountriesGrid />
+            </Route>
+            <Route path="/country/:id">
+              <SingleCountry />
+            </Route>
+          </Switch>
+        </main>
+      </BrowserRouter>
     </div>
   );
 }

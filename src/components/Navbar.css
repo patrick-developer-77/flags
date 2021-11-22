@@ -1,0 +1,10 @@
+.navbar .mode {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	user-select: none;
+}
+
+.navbar .mode img {
+	margin-right: 0.5rem;
+}

@@ -1,38 +1,140 @@
+:root {
+	--light-gray: hsl(210, 22%, 22%);
+	--dark-gray: hsl(205, 26%, 17%);
+	--transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+.dark,
+.light {
+	transition: var(--transition);
+}
+
 .App {
-  text-align: center;
+	min-height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App.light {
+	background-color: #fafafa;
+	transition: var(--transition);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App.dark {
+	background-color: var(--dark-gray);
+	transition: var(--transition);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.App .navbar.dark {
+	background-color: var(--light-gray);
+	transition: var(--transition);
 }
 
-.App-link {
-  color: #61dafb;
+.App.dark .navbar,
+.App.dark select,
+.App.dark .input-group-text,
+.App.dark input,
+.App.dark .card {
+	background-color: var(--light-gray);
+	color: #efefef;
+	transition: var(--transition);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App .navbar.light,
+.App.light .navbar,
+.App.light .input-group-text,
+.App.light select,
+.App.light input,
+.App.light .card {
+	background-color: #fff;
+	color: #222;
+	transition: var(--transition);
+}
+
+.App .navbar.dark .navbar-brand,
+.App .navbar.dark .mode,
+.App .navbar.dark .mode svg {
+	color: #efefef;
+}
+
+p {
+	margin-bottom: 0.5rem;
+}
+
+.form-select {
+	background-image: none;
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-color: transparent;
+	border: none;
+	padding: 0 1em 0 0;
+	margin: 0;
+	width: 100%;
+	font-family: inherit;
+	font-size: inherit;
+	cursor: inherit;
+	line-height: inherit;
+	z-index: 1;
+	outline: none;
+}
+
+.select {
+	display: grid;
+	grid-template-areas: "select";
+	align-items: center;
+	position: relative;
+	border-radius: 0.25em;
+	cursor: pointer;
+	border: none;
+	outline: none;
+}
+
+.select select,
+.select::after {
+	grid-area: select;
+}
+
+.select::after {
+	content: "";
+	justify-self: end;
+	display: inline-block;
+	content: "";
+	vertical-align: -.125em;
+	background-repeat: no-repeat;
+	background-size: 1rem 1rem;
+	width: 1rem;
+	height: 1rem;
+	z-index: 1;
+	margin-right: 0.5rem;
+}
+
+.App.light .select::after {
+	background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23333' class='bi bi-caret-down-fill' viewBox='0 0 16 16'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>");
+	transition: background-image 150ms ease-in-out;
+}
+
+.App.dark .select::after {
+	background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23fff' class='bi bi-caret-down-fill' viewBox='0 0 16 16'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>");
+	transition: background-image 150ms ease-in-out;
+}
+
+select:focus+.focus {
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	right: -1px;
+	bottom: -1px;
+	border: 2px solid var(--select-focus);
+	border-radius: inherit;
+}
+
+label {
+	font-size: 1.125rem;
+	font-weight: 500;
+}
+
+.select+label {
+	margin-top: 2rem;
 }

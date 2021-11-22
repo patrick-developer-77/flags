@@ -1,0 +1,45 @@
+.single-country button {
+	padding: 1px 20px;
+}
+
+.App.light .single-country button {
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
+	transition: var(--transition);
+}
+
+.App.dark .single-country button {
+	background-color: var(--light-gray);
+	color: #fff;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
+	transition: var(--transition);
+}
+
+.single-country .btn-borders button {
+	margin-right: .5rem;
+	margin-bottom: .5rem;
+}
+
+.App.dark .single-country,
+.App.light .single-country {
+	transition: var(--transition);
+}
+
+.App.dark .single-country {
+	color: #fff;
+}
+
+.single-country .btn-borders {
+	margin-right: 0;
+}
+
+.single-country .tld span:after,
+.single-country .currency span:after,
+.single-country .language span:after {
+	content: ', '
+}
+
+.single-country .tld span:last-child:after,
+.single-country .currency span:last-child:after,
+.single-country .language span:last-child:after {
+	content: ''
+}
