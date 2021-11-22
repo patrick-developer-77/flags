@@ -8,7 +8,7 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [mode, setMode] = useState('dark')
+  const [mode, setMode] = useState('light')
 
   return (
     <div className={`App ${mode}`}>
@@ -20,7 +20,7 @@ function App() {
               <CountriesGrid />
             </Route>
             <Route path="/country/:id">
-              <SingleCountry />
+              <SingleCountry mode={mode} />
             </Route>
           </Switch>
         </main>

@@ -9,7 +9,6 @@ import iconSearch from '../img/icon-search.svg'
 export default function CountriesGrid() {
 	const [allCountries, setAllCountries] = useState([])
 	const [filteredCountries, setFilteredCountries] = useState([])
-	const [isPending, setIsPending] = useState(false)
 	const [error, setError] = useState(false)
 
 	const [term, setTerm] = useState('')
@@ -27,14 +26,12 @@ export default function CountriesGrid() {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			setIsPending(true)
 			setFilteredCountries(null)
 			setAllCountries(null)
 			try {
 				const res = await fetch(filter)
 				if (!res.ok) {
 					setError('No flags to load')
-					setIsPending(false)
 					throw new Error(res.statusText)
 				}
 				let tempArray = []
@@ -44,10 +41,8 @@ export default function CountriesGrid() {
 				})
 				setAllCountries(tempArray)
 				setFilteredCountries(tempArray)
-				setIsPending(false)
 			} catch(err) {
 				console.log(err)
-				setIsPending(false)
 			}
 		}
 		fetchData()
@@ -104,7 +99,6 @@ export default function CountriesGrid() {
 				<Col xs="10" md="12">
 					<div className="countries-grid">
 						{error && <p>{error}</p>}
-						{isPending && <p>Loading...</p>}
 						{filteredCountries && filteredCountries.map(country => (
 							<div className="card" key={country.alpha2Code}>
 								<img src={country.flag} alt={country.name} className="img-fluid" />

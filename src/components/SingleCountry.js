@@ -3,12 +3,13 @@ import { useHistory, useParams, Link } from 'react-router-dom'
 import { Container, Row, Col } from 'reactstrap'
 import BorderCountry from './BorderCountry'
 
-// styles
+// styles and images
 import './SingleCountry.css'
+import arrowLeft from '../img/arrow-left.svg'
+import arrowLeftDark from '../img/arrow-left-dark.svg'
 
-export default function SingleCountry() {
+export default function SingleCountry({ mode }) {
 	const [country, setCountry] = useState(null)
-	const [isPending, setIsPending] = useState(false)
 	const [error, setError] = useState(null)
 	const { id } = useParams()
 	const history = useHistory()
@@ -16,7 +17,6 @@ export default function SingleCountry() {
 	useEffect(() => {
 
 		const fetchData = async () => {
-			setIsPending(true)
 
 			try {
 				const res = await fetch(`https://restcountries.com/v2/alpha/${id}`)
@@ -26,7 +26,6 @@ export default function SingleCountry() {
 				const json = await res.json()
 
 				setCountry(json)
-				setIsPending(false)
 				setError(null)
 			} catch(err) {
 				console.log(err)
@@ -41,11 +40,12 @@ export default function SingleCountry() {
 				<Col xs="11" md="12">
 					<div className="single-country">
 						{error && <p>{error}</p>}
-						{isPending && <></>}
 						{country && (
 							<>
-								{console.log(country)}
-								<button className="btn my-5" onClick={() => history.goBack()}>Back</button>
+								<button className="btn my-5 d-flex align-items-center justify-content-between" onClick={() => history.goBack()}>
+									<img src={mode === 'light' ? arrowLeft : arrowLeftDark} className="me-1" alt="" />
+									<span>Back</span>
+								</button>
 								<Row className="align-items-center">
 									<Col xs="12" md="5" lg="6">
 										<img src={country.flags.svg} alt={country.name} className="img-fluid mb-5 mb-md-0" />
